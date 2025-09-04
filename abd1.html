@@ -189,49 +189,30 @@
             color: #008ba3;
             font-weight: bold;
         } 
-         @media (max-width: 480px) {
-            .nav-links a {
-                padding: 6px 10px;
-                font-size: 14px;
-            }
-          
-            .contener {
-                flex-direction: column;   /* يخلي العناصر تحت بعض */
-                align-items: center;      /* يوسطنهم في النص */
-                margin: 100px auto;
-            }
+        @media (max-width: 768px) {
+    .contener {
+        flex-direction: column;   /* العناصر تبقى تحت بعض */
+        align-items: center;      /* تتوسطن في النص */
+        margin: 100px auto;
+    }
 
-            .profile-card {
-                max-width: 100%;          /* تخلي الكارت ياخد عرض الشاشة */
-            }
+    .profile-card {
+        max-width: 100%;          /* الكارت ياخد العرض كله */
+    }
 
-            .profile-image img {
-                max-width: 90%;           /* تكبر الصورة لحد 90% من الشاشة */
-                height: auto;
-            }
+    .profile-image img {
+        width: 100%;              /* الصورة تكبر بعرض الشاشة */
+        max-width: 400px;         /* بس بخلي ليها حد أقصى 400px */
+        height: auto;
+    }
 
-            .requirements-section {
-                width: 100%;
-                max-width: 100%;
-                margin-top: 20px;
-            }
+    .requirements-section {
+        width: 100%;
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
 
-
-
-            
-            .section-title, .section-title2 {
-                font-size: 22px;
-                padding: 8px 16px;
-            }
-            
-            .requirement-item {
-                padding: 15px;
-            }
-            
-            .requirement-item p {
-                font-size: 16px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -282,4 +263,5 @@
     </div>
 </body>
 </html>
+
 
