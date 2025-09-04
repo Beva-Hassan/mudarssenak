@@ -215,95 +215,29 @@
         /* تحسينات للشاشات المتوسطة والصغيرة */
         @media (max-width: 992px) {
             .contener {
-                flex-direction: column;
-                align-items: center;
-                gap: 30px;
+                flex-direction: column;   /* العناصر تبقى تحت بعض */
+                align-items: center;      /* تتوسطن في النص */
+                margin: 100px auto;
             }
-            
+
             .profile-card {
-                max-width: 90%;
+                max-width: 100%;          /* الكارت ياخد العرض كله */
             }
-            
+
+            .profile-image img {
+                width: 100%;              /* الصورة تكبر بعرض الشاشة */
+                max-width: 400px;         /* بس بخلي ليها حد أقصى 400px */
+                height: auto;
+            }
+
             .requirements-section {
-                width: 90%;
+                width: 100%;
+                max-width: 100%;
+                margin-top: 20px;
             }
+        
         }
         
-        @media (max-width: 768px) {
-            .text {
-                padding: 12px 5%;
-            }
-            
-            .nav-links {
-                position: fixed;
-                top: 60px;
-                right: 0;
-                height: 0;
-                width: 100%;
-                background-color: rgba(0, 188, 212, 0.98);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                gap: 0;
-                overflow: hidden;
-                transition: all 0.4s ease;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            }
-            
-            .nav-links.active {
-                height: calc(100vh - 60px);
-                padding: 20px 0;
-            }
-            
-            .nav-links a {
-                width: 80%;
-                text-align: center;
-                margin: 10px 0;
-            }
-            
-            .nav-links h2, 
-            .nav-links h3, 
-            .nav-links h4, 
-            .nav-links h5 {
-                width: 100%;
-                text-align: center;
-                margin: 8px 0;
-                padding: 12px;
-            }
-            
-            .menu-toggle {
-                display: flex;
-            }
-            
-            .contener {
-                margin-top: 100px;
-            }
-            
-            .profile-image img {
-                max-width: 250px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .text h1 {
-                font-size: 22px;
-            }
-            
-            .section-title,
-            .section-title2 {
-                font-size: 22px;
-                padding: 8px 20px;
-            }
-            
-            .requirement-item p,
-            .payment-method p {
-                font-size: 16px;
-            }
-            
-            .profile-image img {
-                max-width: 200px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -311,17 +245,10 @@
         <a href="index.html" style="text-decoration: none; color: white;">
             <h1>مدرسينك</h1>
         </a>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
         <div class="nav-links" id="navLinks">
             <a href="infor.html" style="text-decoration: none; color: white;">
                 <h2>في إيه هنا ؟</h2>
             </a>
-            <h3>ادخل سجل متفكرش</h3>
-            <h4>سجلت قبل كدا</h4>
             <h5>English</h5>
         </div>
     </div>
@@ -357,20 +284,5 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // JavaScript للتحكم في فتح وإغلاق القائمة على الجوال
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-        
-        // إغلاق القائمة عند النقر على رابط
-        const navItems = document.querySelectorAll('.nav-links h2, .nav-links h3, .nav-links h4, .nav-links h5');
-        navItems.forEach(item => {
-            item.addEventListener('click', function() {
-                document.getElementById('navLinks').classList.remove('active');
-            });
-        });
-    </script>
 </body>
 </html>
