@@ -5,11 +5,13 @@
     <title>عبد الله عيسي</title>
     <link href="https://fonts.googleapis.com/css2?family=Rakkas&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         body {
-            /* overflow-x: hidden; */
             font-family: 'Tahoma', 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
         }
         .text {
             position: fixed;
@@ -30,7 +32,7 @@
             font-family: 'Rakkas', cursive;
             font-size: 28px;
         }
-        .text h2, .text h3, .text h4 {
+        .text h2 {
             color: white;
              border-color: white;
         }
@@ -44,7 +46,7 @@
             gap: 15px;
             align-items: center;
         }
-        h2, h3, h4, h5 {
+        h2,h5 {
             padding: 8px 15px;
             margin: 0;
             font-size: 16px;
@@ -56,14 +58,6 @@
         }
         h2:hover {
             border-bottom: 2px solid white;
-        }
-        h3 {
-            border-radius: 50px;
-            border: 2px solid #00bcd4;
-        }
-        h4 {
-            border-radius: 100px;
-            border: 2px solid #00bcd4; 
         }
         h5 {
             border-radius: 50px;
@@ -191,90 +185,51 @@
             color: #008ba3;
             font-weight: bold;
         } 
-        @media (max-width: 768px) {
-             .text {
-            position: fixed;
-            top: 0;
-            color: aliceblue;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            right: 0;
-            left: 0;
-            z-index: 10;
-            background-color: rgba(0, 188, 212, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-        .text h1 {
-            margin: 0;
-            font-family: 'Rakkas', cursive;
-            font-size: 28px;
-        }
-        .text h2, .text h3, .text h4 {
-            color: white;
-             border-color: white;
-        }
-
-        .text h5 {
-            background-color: white;
-            color: #00bcd4; 
-        }
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        h2, h3, h4, h5 {
-            padding: 8px 15px;
-            margin: 0;
-            font-size: 16px;
+        
+        /* إضافة زر القائمة للجوال */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
             cursor: pointer;
+        }
+        
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 5px;
             transition: all 0.3s ease;
         }
-        h2 {
-            border-bottom: 2px solid transparent;
+        
+        /* تحسينات للشاشات المتوسطة والصغيرة */
+        @media (max-width: 992px) {
+            .contener {
+                flex-direction: column;   /* العناصر تبقى تحت بعض */
+                align-items: center;      /* تتوسطن في النص */
+                margin: 100px auto;
+            }
+
+            .profile-card {
+                max-width: 100%;          /* الكارت ياخد العرض كله */
+            }
+
+            .profile-image img {
+                width: 100%;              /* الصورة تكبر بعرض الشاشة */
+                max-width: 400px;         /* بس بخلي ليها حد أقصى 400px */
+                height: auto;
+            }
+
+            .requirements-section {
+                width: 100%;
+                max-width: 100%;
+                margin-top: 20px;
+            }
+        
         }
-        h2:hover {
-            border-bottom: 2px solid white;
-        }
-        h3 {
-            border-radius: 50px;
-            border: 2px solid #00bcd4;
-        }
-        h4 {
-            border-radius: 100px;
-            border: 2px solid #00bcd4; 
-        }
-        h5 {
-            border-radius: 50px;
-            background-color: #00bcd4; 
-            border: 2px solid #00bcd4;
-        }  
-
-    .contener {
-        flex-direction: column;   /* العناصر تبقى تحت بعض */
-        align-items: center;      /* تتوسطن في النص */
-        margin: 100px auto;
-    }
-
-    .profile-card {
-        max-width: 100%;          /* الكارت ياخد العرض كله */
-    }
-
-    .profile-image img {
-        width: 100%;              /* الصورة تكبر بعرض الشاشة */
-        max-width: 400px;         /* بس بخلي ليها حد أقصى 400px */
-        height: auto;
-    }
-
-    .requirements-section {
-        width: 100%;
-        max-width: 100%;
-        margin-top: 20px;
-    }
-}
-
+        
     </style>
 </head>
 <body>
@@ -282,12 +237,10 @@
         <a href="index.html" style="text-decoration: none; color: white;">
             <h1>مدرسينك</h1>
         </a>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
             <a href="infor.html" style="text-decoration: none; color: white;">
                 <h2>في إيه هنا ؟</h2>
             </a>
-            <h3>ادخل سجل متفكرش</h3>
-            <h4>سجلت قبل كدا</h4>
             <h5>English</h5>
         </div>
     </div>
@@ -325,7 +278,3 @@
     </div>
 </body>
 </html>
-
-
-
-
