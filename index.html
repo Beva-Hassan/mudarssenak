@@ -378,7 +378,7 @@
                 width: 200px;
                 padding: 15px;
                 border-radius: 0 0 12px 12px;
-                z-index: 999;
+                z-index: 9999;
             }
 
             .nav-links a h2,
@@ -448,14 +448,13 @@
             <span></span>
             <span></span>
         </div>
-            <div class="nav-links" id="navLinks">
-                <a href="infor.html" style="text-decoration: none; color: white;">
-                    <h2>في إيه هنا ؟</h2>
-                </a>
-                <h3>ادخل سجل متفكرش</h3>
-                <h4>سجلت قبل كدا</h4>
-                <h5>English</h5>
-            </div>
+           <div class="nav-links" id="navLinks">
+            <a href="infor.html"><h2>في إيه هنا ؟</h2></a>
+            <a href="#"><h3>ادخل سجل متفكرش</h3></a>
+            <a href="#"><h4>سجلت قبل كدا</h4></a>
+            <a href="#"><h5>English</h5></a>
+        </div>
+
         </div>
         <div class="text2">
             <h1>منصة مدرسينك</h1>
@@ -690,18 +689,44 @@
                 updateSlider();
             }
         });
-           // JavaScript للتحكم في فتح وإغلاق القائمة على الجوال
+                // فتح وقفل القائمة
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('navLinks').classList.toggle('active');
         });
-        
-        // إغلاق القائمة عند النقر على رابط
-        const navItems = document.querySelectorAll('.nav-links h2, .nav-links h3, .nav-links h4, .nav-links h5');
+
+        // إغلاق القائمة عند الضغط على أي لينك
+        const navItems = document.querySelectorAll('.nav-links a');
         navItems.forEach(item => {
             item.addEventListener('click', function() {
                 document.getElementById('navLinks').classList.remove('active');
             });
         });
+
+                let startX = 0;
+        let endX = 0;
+
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        track.addEventListener('touchend', (e) => {
+    endX = e.changedTouches[0].clientX;
+    if (startX - endX > 50) {
+        // سحب لليسار -> التالي
+        const maxIndex = totalSlides - visibleSlides;
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateSlider();
+        }
+    } else if (endX - startX > 50) {
+        // سحب لليمين -> السابق
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+        }
+    }
+});
+
     </script> 
 </body>
 </html>
