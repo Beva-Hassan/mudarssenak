@@ -450,9 +450,9 @@
         </div>
            <div class="nav-links" id="navLinks">
             <a href="infor.html"><h2>في إيه هنا ؟</h2></a>
-            <a href="#"><h3>ادخل سجل متفكرش</h3></a>
-            <a href="#"><h4>سجلت قبل كدا</h4></a>
-            <a href="#"><h5>English</h5></a>
+            <h3>ادخل سجل متفكرش</h3>
+            <h4>سجلت قبل كدا</h4>
+            <h5>English</h5>
         </div>
 
         </div>
@@ -673,29 +673,13 @@
             }
             updateSlider();
         }, 3000);
-        
-        // أزرار التحكم بالسلايدر
-        document.querySelector('.slider-btn.left').addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex--;
-                updateSlider();
-            }
-        });
-        
-        document.querySelector('.slider-btn.right').addEventListener('click', () => {
-            const maxIndex = totalSlides - visibleSlides;
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-                updateSlider();
-            }
-        });
                 // فتح وقفل القائمة
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('navLinks').classList.toggle('active');
         });
 
         // إغلاق القائمة عند الضغط على أي لينك
-        const navItems = document.querySelectorAll('.nav-links a');
+        const navItems = document.querySelectorAll('.na_links h2,.nav_links h3,.nav_links h4,.nav_links h5');
         navItems.forEach(item => {
             item.addEventListener('click', function() {
                 document.getElementById('navLinks').classList.remove('active');
@@ -730,6 +714,7 @@
     </script> 
 </body>
 </html>
+
 
 
 
