@@ -55,13 +55,11 @@
             color: white;   
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
-        .text.scrolled h2,
-        .text.scrolled h3,
-        .text.scrolled h4 {
-            color: white;
-            border-color: white;
-        }
-        .text.scrolled h5 {
+        
+        .text h5,
+        .text h2,
+        .text h3,
+        .text h4 {
             background-color: white;
             color: #00bcd4;
         }
@@ -220,7 +218,6 @@
             font-size: 16px;
         } 
         
-         Slider Styles
         .slider-container {
             position: relative;
             width: 100%;
@@ -255,12 +252,6 @@
         }
         .slider-btn:hover {
             background-color: rgba(0, 188, 212, 1);
-        }
-        .slider-btn.left {
-            right: 20px;
-        }
-        .slider-btn.right {
-            left: 20px;
         }
         
         /* Footer Styles - التصميم المحسن للفوتر */
@@ -371,14 +362,15 @@
             .nav-links {
                 display: none; 
                 flex-direction: column;   /* خليها عمودية */
-                background: rgba(0, 188, 212, 0.95);
+                background:white; 
                 position: absolute;
                 top: 70px;  /* تحت الهيدر */
-                right: 0;
+                right: 200px;
                 width: 200px;
                 padding: 15px;
                 border-radius: 0 0 12px 12px;
                 z-index: 9999;
+
             }
 
             .nav-links a h2,
@@ -665,14 +657,27 @@
             track.style.transform = `translateX(${offset}px)`;
         } 
        
-        setInterval(() => {
-            if (currentIndex > 0) {
-                currentIndex--;
-            } else {
-                currentIndex = totalSlides - visibleSlides;
-            }
-            updateSlider();
-        }, 3000);
+      function updateSlider() {
+    const maxIndex = totalSlides - visibleSlides;
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+    if (currentIndex < 0) currentIndex = 0;
+    const offset = currentIndex * slideWidth;
+    track.style.transform = `translateX(${offset}px)`; // بالسالب
+
+}
+
+setInterval(() => {
+    if (currentIndex > 0) {
+        currentIndex--;
+    } else {
+        currentIndex = totalSlides - visibleSlides;
+    }
+    updateSlider();
+}, 3000);
+
+
+
+
                 // فتح وقفل القائمة
         document.getElementById('menuToggle').addEventListener('click', function() {
             document.getElementById('navLinks').classList.toggle('active');
@@ -686,35 +691,38 @@
             });
         });
 
-                let startX = 0;
-        let endX = 0;
+           let startX = 0;
+let endX = 0;
 
-        track.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
+track.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    clearInterval(autoSlide); // وقف الأوتوماتيك مؤقت
+});
 
-        track.addEventListener('touchend', (e) => {
+track.addEventListener('touchend', (e) => {
     endX = e.changedTouches[0].clientX;
+
+    const maxIndex = totalSlides - visibleSlides;
+
     if (startX - endX > 50) {
         // سحب لليسار -> التالي
-        const maxIndex = totalSlides - visibleSlides;
         if (currentIndex < maxIndex) {
             currentIndex++;
-            updateSlider();
         }
     } else if (endX - startX > 50) {
         // سحب لليمين -> السابق
         if (currentIndex > 0) {
             currentIndex--;
-            updateSlider();
         }
     }
+
+    updateSlider();
+    autoSlide = setInterval(nextSlide, 3000); // رجّع الحركة التلقائية
 });
 
     </script> 
 </body>
 </html>
-
 
 
 
