@@ -235,6 +235,14 @@
         .slider-btn:hover {
             background-color: rgba(0, 188, 212, 1);
         }
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
         
         /* Footer Styles - التصميم المحسن للفوتر */
         .footer-container {
@@ -467,6 +475,7 @@
 
      <div class="slide-in">اختر مدرسك</div>
      <div class="slider-container">
+        <button class="slider-btn prev-btn">&#10094;</button>
                 <div class="photo2-slider">
                 <div class="photo2-track">
                 <div class="photo-card">
@@ -523,8 +532,12 @@
                     <h3>مدرسه تربيه دينيه</h3>
               </div>
                     </a>
-                </div>    
-        </div>
+                </div>   
+                </div>
+                </div>
+                 <button class="slider-btn next-btn">&#10095;</button>
+     </div>
+     
 
 
 
@@ -599,68 +612,91 @@
     </div>
 
     <script>
-        // كود الجافاسكريبت الأصلي
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        });
-        
-        const slideElements = document.querySelectorAll('.slide-in');
-        slideElements.forEach(el => observer.observe(el));
-        
-        window.addEventListener('scroll', () => {
-            const text = document.querySelector('.text');
-            const contereHeight = document.querySelector('.contere').offsetHeight;
-            if(window.scrollY > contereHeight) {
-                text.classList.add('scrolled');
-            } else {
-                text.classList.remove('scrolled');
+       
+    // كود الأنيميشن للعنوان
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
             }
         });
-        
+    });
 
-                // فتح وقفل القائمة
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
+    const slideElements = document.querySelectorAll('.slide-in');
+    slideElements.forEach(el => observer.observe(el));
+
+    // تغيير الهيدر مع السكروول
+    window.addEventListener('scroll', () => {
+        const text = document.querySelector('.text');
+        const contereHeight = document.querySelector('.contere').offsetHeight;
+        if (window.scrollY > contereHeight) {
+            text.classList.add('scrolled');
+        } else {
+            text.classList.remove('scrolled');
+        }
+    });
+
+    // فتح وقفل القائمة
+    document.getElementById('menuToggle').addEventListener('click', function () {
+        document.getElementById('navLinks').classList.toggle('active');
+    });
+
+    const navItems = document.querySelectorAll('.nav-links h3');
+    navItems.forEach(item => {
+        item.addEventListener('click', function () {
+            document.getElementById('navLinks').classList.remove('active');
         });
+    });
 
-        // إغلاق القائمة عند الضغط على أي لينك
-        const navItems = document.querySelectorAll('.nav_links h3');
-        navItems.forEach(item => {
-            item.addEventListener('click', function() {
-                document.getElementById('navLinks').classList.remove('active');
-            });
-        });
+    // ====== السلايدر ======
+    const track = document.querySelector('.photo2-track');
+    const slides = document.querySelectorAll('.photo2-track .photo-card');
+    const slideWidth = 305;
+    const totalSlides = slides.length;
+    let currentIndex = 0;
 
-           let startX = 0;
-        let endX = 0;
+    function updateSlider() {
+        const offset = -(currentIndex * slideWidth);
+        track.style.transform = `translateX(${offset}px)`;
+    }
 
-        track.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            clearInterval(autoSlide); // وقف الأوتوماتيك مؤقت
-        });
+    // أسهم التحكم
+    document.querySelector('.prev-btn').addEventListener('click', () => {
+        if ( currentIndex < 0) {
+             currentIndex++;
+        updateSlider();}
+    }); 
 
-        track.addEventListener('touchend', (e) => {
-            endX = e.changedTouches[0].clientX;
+    document.querySelector('.next-btn').addEventListener('click', () => {
+       currentIndex--; 
+       if (currentIndex >= totalSlides) 
+       { currentIndex = totalSlides - 1; }
+        updateSlider();
+    });
 
-            const maxIndex = totalSlides - visibleSlides;
+    // السحب باللمس (تاتش)
+    let startX = 0;
+    let endX = 0;
 
-            if (startX - endX > 50) {
-                // سحب لليسار -> التالي
-                if (currentIndex > 0) {
-                    currentIndex++;
-                }
-            } else if (endX - startX > 50) {
-                // سحب لليمين -> السابق
-                if (currentIndex < maxIndex ) {
-                    currentIndex--;
-                }
-            }
+    track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+    });
 
-            });
+    track.addEventListener('touchend', (e) => {
+        endX = e.changedTouches[0].clientX;
+        if (startX - endX > 50) {
+            // سحب لليسار → التالي
+            currentIndex++;
+            if (currentIndex >= totalSlides) currentIndex = 0;
+            updateSlider();
+        } else if (endX - startX > 50) {
+            // سحب لليمين → السابق
+            currentIndex--;
+            if (currentIndex < 0) currentIndex = totalSlides - 1;
+            updateSlider();
+        }
+    });
+
 
     </script> 
 </body>
