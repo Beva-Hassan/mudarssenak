@@ -56,44 +56,26 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
         
-        .text h5,
-        .text h2,
-        .text h3,
-        .text h4 {
-            background-color: white;
-            color: #00bcd4;
-        }
         .nav-links {
             display: flex;
             gap: 15px;
             align-items: center;
         }
-        h2, h3, h4, h5 {
+        .text h3 {
             padding: 8px 15px;
             margin: 0;
             font-size: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
-        }
-        h2 {
-            border-bottom: 2px solid transparent;
-        }
-        h2:hover {
-            border-bottom: 2px solid white;
-        }
-        h3 {
-            border-radius: 50px;
+             border-radius: 50px;
             border: 2px solid #00bcd4;
+            color: white;
         }
-        h4 {
-            border-radius: 100px;
-            border: 2px solid #00bcd4;
+        .text.scrolled h3{
+             background-color: white; 
+            color: #00bcd4;
         }
-        h5 {
-            border-radius: 50px;
-            background-color: #00bcd4;
-            border: 2px solid #00bcd4;
-        } 
+    
         .text2 {
             color: aliceblue;
             position: absolute;
@@ -342,7 +324,7 @@
             justify-content: space-around;
             width: 30px;
             height: 25px;
-            cursor: pointer;
+            /* cursor: pointer; */
         }
         
         .menu-toggle span {
@@ -365,20 +347,20 @@
                 background:white; 
                 position: absolute;
                 top: 70px;  /* تحت الهيدر */
-                right: 200px;
-                width: 200px;
+                right: 0;
+                left: 0;
+                width: 100%;
                 padding: 15px;
                 border-radius: 0 0 12px 12px;
                 z-index: 9999;
 
             }
 
-            .nav-links a h2,
-            .nav-links h3,
-            .nav-links h4,
-            .nav-links h5 {
+            .nav-links h3
+             {
                 margin: 10px 0;
                 text-align: center;
+                 color: #00bcd4;
             }
 
             .nav-links.active {
@@ -441,10 +423,8 @@
             <span></span>
         </div>
            <div class="nav-links" id="navLinks">
-            <a href="infor.html"><h2>في إيه هنا ؟</h2></a>
             <h3>ادخل سجل متفكرش</h3>
-            <h4>سجلت قبل كدا</h4>
-            <h5>English</h5>
+            <h3>سجلت قبل كدا</h3>
         </div>
 
         </div>
@@ -641,42 +621,6 @@
             }
         });
         
-        // كود السلايدر
-        const track = document.querySelector('.photo2-track');
-        const slides = document.querySelectorAll('.photo2-track .photo-card');
-        const slideWidth = 305;
-        const totalSlides = slides.length;
-        const visibleSlides = 3;
-        let currentIndex = 0;
-
-        function updateSlider() {
-            const maxIndex = totalSlides - visibleSlides;
-            if (currentIndex > maxIndex) currentIndex = maxIndex;
-            if (currentIndex < 0) currentIndex = 0;
-            const offset = currentIndex * slideWidth;
-            track.style.transform = `translateX(${offset}px)`;
-        } 
-       
-      function updateSlider() {
-    const maxIndex = totalSlides - visibleSlides;
-    if (currentIndex > maxIndex) currentIndex = maxIndex;
-    if (currentIndex < 0) currentIndex = 0;
-    const offset = currentIndex * slideWidth;
-    track.style.transform = `translateX(${offset}px)`; // بالسالب
-
-}
-
-setInterval(() => {
-    if (currentIndex > 0) {
-        currentIndex--;
-    } else {
-        currentIndex = totalSlides - visibleSlides;
-    }
-    updateSlider();
-}, 3000);
-
-
-
 
                 // فتح وقفل القائمة
         document.getElementById('menuToggle').addEventListener('click', function() {
@@ -684,7 +628,7 @@ setInterval(() => {
         });
 
         // إغلاق القائمة عند الضغط على أي لينك
-        const navItems = document.querySelectorAll('.na_links h2,.nav_links h3,.nav_links h4,.nav_links h5');
+        const navItems = document.querySelectorAll('.nav_links h3');
         navItems.forEach(item => {
             item.addEventListener('click', function() {
                 document.getElementById('navLinks').classList.remove('active');
@@ -692,33 +636,31 @@ setInterval(() => {
         });
 
            let startX = 0;
-let endX = 0;
+        let endX = 0;
 
-track.addEventListener('touchstart', (e) => {
-    startX = e.touches[0].clientX;
-    clearInterval(autoSlide); // وقف الأوتوماتيك مؤقت
-});
+        track.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            clearInterval(autoSlide); // وقف الأوتوماتيك مؤقت
+        });
 
-track.addEventListener('touchend', (e) => {
-    endX = e.changedTouches[0].clientX;
+        track.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
 
-    const maxIndex = totalSlides - visibleSlides;
+            const maxIndex = totalSlides - visibleSlides;
 
-    if (startX - endX > 50) {
-        // سحب لليسار -> التالي
-        if (currentIndex < maxIndex) {
-            currentIndex++;
-        }
-    } else if (endX - startX > 50) {
-        // سحب لليمين -> السابق
-        if (currentIndex > 0) {
-            currentIndex--;
-        }
-    }
+            if (startX - endX > 50) {
+                // سحب لليسار -> التالي
+                if (currentIndex > 0) {
+                    currentIndex++;
+                }
+            } else if (endX - startX > 50) {
+                // سحب لليمين -> السابق
+                if (currentIndex < maxIndex ) {
+                    currentIndex--;
+                }
+            }
 
-    updateSlider();
-    autoSlide = setInterval(nextSlide, 3000); // رجّع الحركة التلقائية
-});
+            });
 
     </script> 
 </body>
