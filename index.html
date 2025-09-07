@@ -673,34 +673,10 @@
        { currentIndex = totalSlides - 1; }
         updateSlider();
     });
-
-    // السحب باللمس (تاتش)
-    let startX = 0;
-    let endX = 0;
-
-    track.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-
-    track.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        if (startX - endX > 50) {
-            // سحب لليسار → التالي
-            currentIndex++;
-            if (currentIndex >= totalSlides) currentIndex = 0;
-            updateSlider();
-        } else if (endX - startX > 50) {
-            // سحب لليمين → السابق
-            currentIndex--;
-            if (currentIndex < 0) currentIndex = totalSlides - 1;
-            updateSlider();
-        }
-    });
-
-
     </script> 
 </body>
 </html>
+
 
 
 
