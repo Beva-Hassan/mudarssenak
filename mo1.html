@@ -27,6 +27,31 @@
             background-color: rgba(0, 188, 212, 0.95);
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
+         .icon img{
+            height: 20px;
+            width: 20px;
+        }
+         body.dark-mode {
+        background-color: #121212;
+        }
+    
+        body.dark-mode .text.scrolled {
+        background-color: rgba(0, 188, 212, 0.9); /* الأزرق اللي عندك يفضل واضح */
+        color: #fff;
+        }
+         .nav-dark-mode {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+        }
+        .nav-dark-mode img {
+            width: 40px;
+            height: 40px;
+            right: 65%;
+            top: 16px;
+        }
         .text h1 {
             margin: 0;
             font-family: 'Rakkas', cursive;
@@ -238,10 +263,12 @@
             <h1>مدرسينك</h1>
         </a>
         <div class="nav-links" id="navLinks">
-            <a href="infor.html" style="text-decoration: none; color: white;">
-                <h2>في إيه هنا ؟</h2>
-            </a>
-            <h5>English</h5>
+           <button id="darkModeToggle" class="nav-dark-mode">
+                    <img id="darkIcon" src="https://cdn-icons-png.flaticon.com/128/5558/5558234.png" alt="وضع الليل">
+                </button>
+                 <a href="infro.html"  class="nav-dark-mode">
+                <img src="https://cdn-icons-png.flaticon.com/128/15339/15339256.png">
+               </a>
         </div>
     </div>
 
@@ -276,5 +303,24 @@
             </div>
         </div>
     </div>
+    <script>
+  const toggleBtn = document.getElementById('darkModeToggle'); // تعريف الزر
+
+  // لما الصفحة تفتح، طبّق الوضع المحفوظ
+  if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+  }
+
+  // لما أضغط على الزر
+  toggleBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+
+    if (document.body.classList.contains('dark-mode')) {
+      localStorage.setItem('theme', 'dark');
+    } else {
+      localStorage.setItem('theme', 'light');
+    }
+  });
+</script>
 </body>
 </html>
