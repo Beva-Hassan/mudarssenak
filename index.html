@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="arabic" dir="rtl">
 <head>
@@ -12,6 +13,9 @@
             width: 100%;
             overflow-x: hidden;
             font-family: 'Tahoma', 'Arial', sans-serif;
+        }
+         body.dark-mode .text {
+            background-color: rgba(0, 120, 140, 0.95);
         }
         .overphoto {
             position: absolute;
@@ -368,6 +372,23 @@
             border-radius: 5px;
             transition: all 0.3s ease;
         }
+        .reserve-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: none;
+            font-size: 16px;
+            cursor: not-allowed;
+            background-color: #bdbdbd; /* رمادي */
+            color: white;
+            transition: all 0.3s ease;
+            }
+
+            .reserve-btn.active {
+            background-color: #00bcd4; /* أزرق */
+            cursor: pointer;
+            }
+
         /* تحسينات للشاشات الصغيرة */
         @media (max-width: 768px) {
             
@@ -461,8 +482,12 @@
             <span></span>
         </div>
            <div class="nav-links" id="navLinks">
+            <a href="login.html" style="text-decoration: none;">
             <h3>ادخل سجل متفكرش</h3>
+            </a>
+            <a href="login2.html" style="text-decoration: none;">
             <h3>سجلت قبل كدا</h3>
+            </a>
         </div>
         </div>
         <div class="text2">
@@ -476,17 +501,19 @@
     <div class="slide-in">الكورسات <br>المقترحه</div>
     <div class="photo">
         <div class="photo-card">
-            <div class="img-container">
-                <a href="mo1.html">
-                <img src="https://cdn-icons-png.flaticon.com/256/7421/7421798.png">
-                </a>
-            </div>
-            <div class="photo-text">
-                <h2>مجمد عبد العزيز</h2>
-                <h3>كورس النحو كامل</h3>
-                <p><span class="price">400 جنيه</span> بدل من <del>600</del></p>
-            </div>
-        </div>
+  <div class="img-container">
+    <a href="mo1.html">
+      <img src="https://cdn-icons-png.flaticon.com/256/7421/7421798.png">
+    </a>
+  </div>
+  <div class="photo-text">
+    <h2>مجمد عبد العزيز</h2>
+    <h3>كورس النحو كامل</h3>
+    <p><span class="price">400 جنيه</span> بدل من <del>600</del></p>
+  </div>
+  <button class="reserve-btn" data-ready="false">احجز</button>
+</div>
+
         <div class="photo-card">
             <div class="img-container">
                 <a href="eed1.html">
@@ -498,6 +525,7 @@
                 <h3>كورس اول وحده </h3>
                 <p><span class="price">350 جنيه</span> بدل من <del>430</del></p>
             </div>
+            <button class="reserve-btn" data-ready="false">احجز</button>
         </div>
     </div>
 
@@ -515,6 +543,7 @@
                     <h3>مدرس انجليزي</h3>
                 </div>
                     </a>
+                    <button class="reserve-btn" data-ready="false">احجز</button>
             </div>
          <div class="photo-card" >
             <a href="eed.html"  style="text-decoration: none; color: black;">
@@ -524,6 +553,7 @@
                     <h3>مدرس علوم</h3>
                 </div>
             </a>
+            <button class="reserve-btn" data-ready="false">احجز</button>
                 </div>
                 <div class="photo-card"  >
                     <a href="abd.html"  style="text-decoration: none;color: black;">
@@ -533,6 +563,7 @@
                     <h3>مدرس دراسات </h3>
                 </div>
                     </a>
+                    <button class="reserve-btn" data-ready="false">احجز</button>
                 </div>
                 <div class="photo-card"  >
                     <a href="hane.html"  style="text-decoration: none;color: black;">
@@ -542,6 +573,7 @@
                     <h3>مدرس رياضات</h3>
                 </div>
                     </a>
+                    <button class="reserve-btn" data-ready="false">احجز</button>
                 </div>
 
                 <div class="photo-card" >
@@ -552,6 +584,7 @@
                     <h3>مدرس لغه عربيه </h3>
                     </div>
                     </a>
+                    <button class="reserve-btn" data-ready="false">احجز</button>
                 </div>
                 <div class="photo-card" >
                     <a href="fatma.html"  style="text-decoration: none;color: black;">
@@ -561,6 +594,7 @@
                     <h3>مدرسه تربيه دينيه</h3>
               </div>
                     </a>
+                    <button class="reserve-btn" data-ready="false">احجز</button>
                 </div>   
                 </div>
                 </div>
@@ -719,6 +753,28 @@
       localStorage.setItem('theme', 'light');
     }
   });
+// كل أزرار الحجز
+const reserveBtns = document.querySelectorAll('.reserve-btn');
+
+reserveBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    // أول ضغطة -> تفعيل الزر
+    if (!btn.classList.contains('active')) {
+      btn.classList.add('active');
+      btn.disabled = false;
+      btn.textContent = "ادخل للمدرس"; // يتغير النص
+    } else {
+      // لو الزر متفعل خلاص، يفتح صفحة المدرس لو موجود
+      const linkEl = btn.parentElement.querySelector('a');
+      if (linkEl) {
+        window.location.href = linkEl.href;
+      } else {
+        alert("مافيش لينك للمدرس هنا!");
+      }
+    }
+  });
+});
+
 
     </script> 
 </body>
