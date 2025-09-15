@@ -191,7 +191,9 @@
         input[type="text"],
         input[type="password"],
         input[type="number"],
-        input[type="tel"] {
+        input[type="email"],
+        input[type="tel"] ,
+        select{
             width: 100%;
             padding: 10px 5px;
             font-size: 25px;
@@ -205,13 +207,16 @@
         input[type="text"]:focus,
         input[type="password"]:focus,
         input[type="number"]:focus,
-        input[type="tel"]:focus {
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus {
             border-bottom: 2px solid #00bcd4; /* يتغير لونه عند الفوكس */
             box-shadow: none; /* نشيل أي شادو */
         }
         body.dark-mode input[type="text"],
         body.dark-mode input[type="password"],
         body.dark-mode input[type="number"],
+         body.dark-mode input[type="email"],
         body.dark-mode input[type="tel"] {
            border-bottom: 2px solid white;
         }
@@ -498,6 +503,24 @@
                     </div>
                 </div>
                 
+                 <div class="class">
+                    <div class="input-group">
+                       
+                        <input type="email" id="بريدك الإلكتروني " placeholder="أدخل بريدك الإلكتروني">
+                    </div>
+                    <div class="input-group">
+                        
+                    <select id="الصف الدراسي" required>
+                        <option value="">اختر الصف الدراسي</option>
+                        <option value="الصف الاول">الصف الأول</option>
+                        <option value="الصف التاني">الصف الثاني</option>
+                        <option value="الصف التالت">الصف الثالث</option>
+                     </select> 
+                    </div>
+                 
+             </div>
+                
+
                 <div class="class">
                     <div class="input-group">
                         
@@ -610,6 +633,28 @@
                 document.getElementById('تأكيد الرقم السري').focus();
             }
         });
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // منع الصفحة من إعادة التحميل
+
+    // ناخد القيم
+    const firstName = document.getElementById('الاسم الاول').value;
+    const lastName = document.getElementById('الاسم التاني').value;
+    const studentPhone = document.getElementById('رقم الطالب').value;
+     const studentid = document.getElementById('بريدك الإلكتروني ').value;
+      const studentclass = document.getElementById('الصف الدراسي').value;
+   
+
+    // نخزنها في localStorage
+    localStorage.setItem('firstName', firstName);
+    localStorage.setItem('lastName', lastName);
+    localStorage.setItem('studentPhone', studentPhone);
+   localStorage.setItem('studentid', studentid);
+   localStorage.setItem('studentclass', studentclass);
+
+    // نروح لصفحة البيانات
+    window.location.href = "infro.html";
+});
+
     </script>
 </body>
 </html>
